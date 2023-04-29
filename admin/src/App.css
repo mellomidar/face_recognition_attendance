@@ -1,0 +1,446 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Times New Roman', Times, serif;
+}
+
+.App {
+  position: relative;
+  background: url("assets/face_recognition.jpg") center / cover no-repeat, rgba(100, 133, 167, 0.9);
+  background-blend-mode: multiply;
+  width: 100vw;
+  height: 100vh;
+  padding: 1.5rem;
+}
+
+.top-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  height: 12%;
+}
+
+.top-left {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 70%;
+}
+
+.school-info h2 {
+  font-size: 2rem;
+  color: #A5C2DD;
+}
+
+.school-info h3 {
+  font-size: 1.2rem;
+  color: #A5C2DD;
+}
+
+.bisu-logo {
+  width: 90px;
+  height: 90px;
+  margin-right: 20px;
+}
+
+.top-right {
+  width: 30%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.date-time {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  background-color: #3074B4;
+  padding: .5rem 2rem;
+}
+
+.date-time * {
+  font-size: 1.5rem;
+  color: white;
+}
+
+.register-records:hover {
+  transform: scale(1.1);
+}
+
+.register-records:active {
+  transform: scale(0.9);
+}
+
+.admin-subwindow-container {
+  height: 90%;
+  position: relative;
+  padding-top: 50px;
+}
+
+.admin-main-btns {
+  margin-top: 100px;
+}
+
+.icons {
+  width: 50px;
+  background-color: #FFBB00;
+  padding: .5rem;
+  border-radius: 50%;
+  margin-bottom: 5px;
+}
+
+.btn-list-item {
+  list-style-type: none;
+}
+
+.icons:hover {
+  transform: scale(1.07);
+  background-color: #3074B4;
+}
+
+.icons:active {
+  transform: scale(0.9);
+}
+
+.subwindow {
+  position: absolute;
+  top: 20px;
+  left: 100px;
+  width: 85vw;
+  height: 80vh;
+  background-color: rgba(160, 157, 157, 0.7);
+  border-radius: 1rem;
+  padding: 1%;
+}
+
+.system-title {
+  color: white;
+  position: absolute;
+  bottom: 340px;
+  font-size: 3.5rem;
+  left: 150px;
+}
+
+.system-title span {
+  display: block;
+  margin-bottom: 30px;
+}
+
+.register-window {
+  padding: 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.registration-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  width: 80%;
+}
+
+.registration-form form h1 {
+  text-align: center;
+  width: 100%;
+}
+
+.registration-form form {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.form-inputs {
+  display: flex;
+  justify-content: space-between;
+}
+
+.form-group {
+  height: 300px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 50px;
+}
+
+.field * {
+  width: 300px;
+  font-size: 1.5rem;
+}
+
+.field label{
+  margin-bottom: 5px
+}
+
+.field input[type="text"] {
+  padding: 1rem;
+  background-color: rgba(243, 243, 243, 0.4);
+  border-radius: .5rem;
+  outline: none;
+  border: none;
+}
+
+label[for="photo"] {
+  cursor: pointer;
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  bottom: -60px;
+  background-color: #FFBB00;
+  padding: .5rem;
+  border-radius: .5rem;
+}
+
+label[for="photo"]:hover {
+  background-color: #daae36;
+}
+
+label[for="photo"]:active {
+  transform: scale(0.9);
+}
+
+.field:last-of-type {
+  position: relative;
+}
+
+.field input[type="file"] {
+  display: none;
+}
+
+.preview-wrapper {
+  width: 200px;
+  height: 220px;
+  background-color:rgba(243, 243, 243, 0.4);
+  border-radius: 1rem;
+  overflow: hidden;
+}
+
+.preview {
+  width: 200px;
+  height: 220px;
+  z-index: 30;
+}
+
+.registration-form form button {
+  height: 60px;
+  background-color: rgb(29, 75, 201);
+  font-size: 1.5rem;
+  cursor: pointer;
+  border: none;
+  border-radius: .5rem;
+  color: white;
+}
+
+.registration-form form button:hover {
+  background-color: rgb(57, 99, 214);;
+}
+
+.registration-form form button:active {
+  background-color: rgb(29, 75, 201);
+}
+
+.report-subwindow {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.record_table {
+  background-color: white;
+  font-size: 1.2rem;
+  position: relative;
+}
+
+.record_table th, td{
+  border: 1px solid black;
+  border-collapse: collapse;
+  text-align: center;
+  width: 300px;
+  padding: 1rem;
+}
+
+.report-subwindow button[type="submit"] {
+  width: 98%;
+  background-color: #daae36;
+  position: absolute;
+  bottom: 10px;
+  border: none;
+  padding: 1rem;
+  border-radius: .5rem;
+  cursor: pointer;
+  font-size: 1.2rem;
+}
+
+.report-subwindow button[type="submit"]:hover {
+  background-color: #c4a654;
+  color: white;
+  transition: .3s;
+}
+
+.report-subwindow button[type="submit"]:active {
+  background-color: #daae36;
+  color: black;
+  transform: scale(0.99)
+}
+
+.report-subwindow .records-specs {
+  height: 5 0px;
+  margin-bottom: 1rem;
+}
+
+.records-specs * {
+  font-size: 1.2rem;
+  padding: .5rem;
+}
+
+.report-subwindow .records-specs select {
+  border-radius: .5rem;
+}
+
+/*Employee Table Design*/
+
+.crud-window {
+  overflow-y: scroll;
+}
+
+.crud-window table tr:hover,
+.crud-window table td:hover {
+  background-color: rgba(218, 174, 54, 0.9);
+  cursor: pointer;
+}
+
+.crud-window table tr th {
+  background-color: white;
+  cursor: default;
+}
+
+.crud-window table tr {
+  position: relative;
+}
+
+.modify-btns {
+  position: absolute;
+  display: none;
+  width: 100%;
+  height: 100%;
+  left: 0;
+}
+
+.modify-btns button {
+  padding: .5rem 1rem;
+  margin-right: 1rem;
+  cursor: pointer;
+  background-color: #5c91c4;
+  border: none;
+}
+
+
+/* Employee Information Page */
+
+.employee-info-page {
+  width: 100%;
+  height: 100%;
+  background-color: #3074B4;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 1rem;
+  overflow: hidden;
+  padding: 3rem;
+}
+
+.user-info-btn {
+  position: absolute;
+  right: 2rem;
+  top: 2rem;
+  z-index: 20;
+  padding: 1rem 1.3rem;
+  font-size: 1.2rem;
+  border-radius: 50%;
+  background-color: red;
+  color: white;
+  cursor: pointer;
+  border: none;
+}
+
+.user-info-btn:hover {
+  transform: scale(1.1);
+}
+
+.edit-info-form {
+  width: 100%;
+  height: 90%;
+  background-color: white;
+  display: flex;
+  padding: 2rem;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: .5rem;
+}
+
+.edit-form-input * {
+  display: block;
+  font-size: 1.2rem;
+}
+
+.edit-form-input input {
+  padding: .5rem;
+  margin-bottom: 2rem;
+}
+
+.edit-form-input label {
+  margin-bottom: .5rem;
+}
+
+.edit-delete-btns {
+  height: 5%;
+  margin-top: .5rem;
+}
+
+.edit-delete-btns button {
+  padding: .5rem 2rem;
+  font-size: 1.2rem;
+  cursor: pointer;
+  border-radius: .5rem;
+  border: none;
+  transition: .2s;
+
+}
+
+.edit-delete-btns button:hover {
+  background-color: #FFBB00;
+  transform: scale(1.02);
+  color: white;
+}
+
+.edit-delete-btns button:nth-child(2) {
+  margin: 0 1rem;
+}
+
+.print-btn {
+  padding: 1rem;
+  background-color: #3074B4;
+  color: white;
+  font-size: 1.2rem;
+  border: none;
+  margin-top: 9rem;
+  border-radius: .5rem;
+}
+
+.print-btn:hover {
+  background-color: white;
+  color: black;
+  cursor: pointer;
+  transition: .3s;
+}
