@@ -54,7 +54,7 @@ function Register() {
     await Axios.post('http://localhost:5000/api/insert', formData, {
       headers: { 'Content-Type': 'multipart/form-data' }
     }).then((response) => {
-      console.log(response)
+      console.log('here')
     }).catch((error) => {
       setAlertText("Registration Failed");
       setShowAlert(true);
