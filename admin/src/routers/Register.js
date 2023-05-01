@@ -1,6 +1,7 @@
 import Axios from "axios";
 import React, { useState } from "react";
 import "../App.css";
+const moment = require('moment')
 
 function Register() {
   const [employee_id, setId] = useState();
@@ -35,16 +36,15 @@ function Register() {
     e.preventDefault();
 
     const formData = new FormData();
-    const now = new Date();
-    const mysqlDatetime = now.toISOString().slice(0, 19).replace('T', ' ');
+    const currentDatetime = moment().format('YYYY-MM-DD HH:mm:ss');
 
     formData.append('employee_id', employee_id);
     formData.append('employee_name', employee_name);
     formData.append('department', department);
     formData.append('designation', designation);
     formData.append('photo', photo);
-    formData.append('registered_at', mysqlDatetime);
-    formData.append('updated_at', mysqlDatetime);
+    formData.append('registered_at', currentDatetime);
+    formData.append('updated_at', currentDatetime);
 
     try {
       await Axios.post('http://localhost:5000/api/insert', formData, {

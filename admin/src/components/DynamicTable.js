@@ -32,7 +32,7 @@ function DynamicTable({ data }) {
         <table className='record_table'>
           <thead>
             <tr>
-              <th></th>
+              <th style={{width:'50px'}}></th>
               <th>Employee ID</th>
               <th>Employee Name</th>
               <th>Department</th>
@@ -44,7 +44,7 @@ function DynamicTable({ data }) {
           <tbody>
             {data.map((row) => (
               <tr key={row.id} onClick={handleRowClick} onMouseOver={rowMouseOver}>
-                <td>{row.id}</td>
+                <td style={{width: '50px'}}>{row.id}</td>
                 <td>{row.employee_id}</td>
                 <td>{row.name}</td>
                 <td>{row.department}</td>

@@ -119,7 +119,6 @@ app.get("/api/employee_info/:id", (req, res) => {
   try {
     db.query('SELECT * FROM employee WHERE employee_id = ?', [req.params.id], (err, result) => {
       if(err) throw err;
-      console.log(result[0]);
       if(result.length === 0) {
         return res.status(404).json({ message: 'User not found.' });
       }

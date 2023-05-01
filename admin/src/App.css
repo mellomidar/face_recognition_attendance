@@ -117,7 +117,7 @@
 .system-title {
   color: white;
   position: absolute;
-  bottom: 340px;
+  top: 150px;
   font-size: 3.5rem;
   left: 150px;
 }
@@ -145,6 +145,7 @@
 
 .registration-form form h1 {
   text-align: center;
+  margin-bottom: 50px;
   width: 100%;
 }
 
@@ -308,6 +309,10 @@ label[for="photo"]:active {
 
 .crud-window {
   overflow-y: scroll;
+}
+
+.crud-window * {
+  font-size: 1rem;
 }
 
 .crud-window table tr:hover,
