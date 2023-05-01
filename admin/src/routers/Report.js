@@ -13,7 +13,7 @@ function Register() {
     axios
       .get("http://localhost:5000/api/data")
       .then((response) => {
-        console.log(response)
+        setData(response)
       })
       .catch((error) => {
         console.log('error');

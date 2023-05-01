@@ -4,7 +4,7 @@ import "../App.css";
 const moment = require('moment')
 
 function Register() {
-  const [employee_id, setId] = useState();
+  const [employee_id, setId] = useState("");
   const [employee_name, setName] = useState("");
   const [department, setDepartment] = useState("");
   const [designation, setDesignation] = useState("");
@@ -28,12 +28,14 @@ function Register() {
     setName("");
     setDepartment("");
     setDesignation("");
-    setPhoto(null);
+    setImagePreview(null);
+    setPhoto("");
   }
 
   const submitRegistration = async (e) => {
 
     e.preventDefault();
+    clearForm();
 
     const formData = new FormData();
     const currentDatetime = moment().format('YYYY-MM-DD HH:mm:ss');
@@ -51,11 +53,11 @@ function Register() {
         headers: { 'Content-Type': 'multipart/form-data' }
       }).then(() => {
         alert('registration successful');
-        clearForm();
       }); 
     } catch (error) {
       console.error('an error');
     }
+    
   };
 
   return (
@@ -71,9 +73,11 @@ function Register() {
                   type="text"
                   name="id"
                   id="id"
+                  value={employee_id}
                   onChange={(e) => {
                     setId(e.target.value);
                   }}
+                  required
                 />
               </div>
               <div className="field">
@@ -82,9 +86,11 @@ function Register() {
                   type="text"
                   name="name"
                   id="name"
+                  value={employee_name}
                   onChange={(e) => {
                     setName(e.target.value);
                   }}
+                  required
                 />
               </div>
             </div>
@@ -95,9 +101,11 @@ function Register() {
                   type="text"
                   name="department"
                   id="department"
+                  value={department}
                   onChange={(e) => {
                     setDepartment(e.target.value);
                   }}
+                  required
                 />
               </div>
               <div className="field">
@@ -106,9 +114,11 @@ function Register() {
                   type="text"
                   name="designation"
                   id="designation"
+                  value={designation}
                   onChange={(e) => {
                     setDesignation(e.target.value);
                   }}
+                  required
                 />
               </div>
             </div>
