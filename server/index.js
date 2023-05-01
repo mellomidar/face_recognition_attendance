@@ -1,7 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
-const mysql = require("mysql");
+const mysql = require("mysql2");
 const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
@@ -67,11 +67,14 @@ app.get("/api/data", (req, res) => {
           id: row.id,
           employee_id: row.employee_id,
           name: row.name,
-          date: row.date,
-          time: row.time,
+          date: row.attendance_date,
+          status: row.status,
+          morning_in: row.morning_in,
+          morning_out: row.morning_out,
+          afternoon_in: row.afternoon_in,
+          afternoon_out: row.afternoon_out
         };
       });
-
       // Send JSON response to the client
       res.json(data);
     });
@@ -87,15 +90,19 @@ app.get("/api/employee_list", (req, res) => {
   try {
     db.query('SELECT * FROM employee', (err, result) => {
       if(err) throw err;
+     
       const data = result.map(row => {
+        const options = { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric'};
+        const registered_at = row.registered_at.toLocaleString('en-US', options)
+        const updated_at = row.registered_at.toLocaleString('en-US', options)
         return {
           id: row.id,
           employee_id: row.employee_id,
           name: row.name,
           department: row.department,
           designation: row.designation,
-          registered_at: row.registered_at,
-          updated_at: row.updated_at,
+          registered_at: registered_at,
+          updated_at: updated_at,
         };
       });
 

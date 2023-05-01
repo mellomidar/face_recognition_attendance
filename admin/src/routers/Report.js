@@ -13,10 +13,10 @@ function Register() {
     axios
       .get("http://localhost:5000/api/data")
       .then((response) => {
-        setData(response.data);
+        console.log(response)
       })
       .catch((error) => {
-        console.log(error);
+        console.log('error');
       });
   }, []);
 

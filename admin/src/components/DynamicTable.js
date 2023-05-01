@@ -22,12 +22,9 @@ function DynamicTable({ data }) {
     setCloseBtnVisible('none');
   }
 
-  // if database table is empty
   if(!data) {
     return;
   } 
-
-  // if data corresponds to employee database table
   
   else if(Object.keys(data[0]).length === 7){
     return (

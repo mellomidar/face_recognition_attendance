@@ -21,6 +21,7 @@ function EmployeeInfo({ id }) {
     Axios
       .get(`http://localhost:5000/api/employee_info/${id}`)
       .then((response) => {
+        console.log('here')
         const employee = response.data[0];
         setRetrievedInfo(response);
         setId(employee.employee_id)
