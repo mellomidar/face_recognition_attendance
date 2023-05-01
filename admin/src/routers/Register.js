@@ -1,7 +1,7 @@
 import Axios from "axios";
 import React, { useState } from "react";
 import "../App.css";
-import PopUp from "../components/PopUp";
+import Alert from "../components/Alert";
 const moment = require('moment')
 
 function Register() {
@@ -13,6 +13,7 @@ function Register() {
   const [imagePreview, setImagePreview] = useState(null)
 
   const [showAlert, setShowAlert] = useState(false);
+  const [alertText, setAlertText] = useState("");
 
   const handleImageChange = async (e) => {
     const file = e.target.files[0];
@@ -50,17 +51,14 @@ function Register() {
     formData.append('registered_at', currentDatetime);
     formData.append('updated_at', currentDatetime);
 
-    try {
-      await Axios.post('http://localhost:5000/api/insert', formData, {
-        headers: { 'Content-Type': 'multipart/form-data' }
-      }).then((response) => {
-        setShowAlert(true);
-        console.log('im here')
-      }); 
-    } catch (error) {
-      console.error('an error');
-    }
-    
+    await Axios.post('http://localhost:5000/api/insert', formData, {
+      headers: { 'Content-Type': 'multipart/form-data' }
+    }).then((response) => {
+      console.log(response)
+    }).catch((error) => {
+      setAlertText("Registration Failed");
+      setShowAlert(true);
+    })
   };
 
   return (
@@ -148,6 +146,7 @@ function Register() {
               </div>
             </div>
           </div>
+          {showAlert && (<Alert type="sucess" message={alertText}/>)}
           <button type="submit">Register</button>
         </form>
       </div>

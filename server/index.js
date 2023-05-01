@@ -47,13 +47,19 @@ app.post("/api/insert",upload.single('photo'), (req, res) => {
     `INSERT INTO employee (employee_id, name, 
     department, designation, image, registered_at, updated_at) 
     VALUES (?,?,?,?,?,?,?)`;
+  
+  try {
+    db.query(
+      sqlInsert,
+      [id, name, dep, des, photo, registered_at, updated_at],
+      (err, result) => {
+        if(err) console.log(err); 
+    })
+  } catch (error) {
+    
+  }
 
-  db.query(
-    sqlInsert,
-    [id, name, dep, des, photo, registered_at, updated_at],
-    (err, result) => {
-      if(err) console.log(err);
-  });
+  
 });
 
 
