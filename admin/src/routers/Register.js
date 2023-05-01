@@ -1,6 +1,7 @@
 import Axios from "axios";
 import React, { useState } from "react";
 import "../App.css";
+import PopUp from "../components/PopUp";
 const moment = require('moment')
 
 function Register() {
@@ -9,8 +10,9 @@ function Register() {
   const [department, setDepartment] = useState("");
   const [designation, setDesignation] = useState("");
   const [photo, setPhoto] = useState(null);
-
   const [imagePreview, setImagePreview] = useState(null)
+
+  const [showAlert, setShowAlert] = useState(false);
 
   const handleImageChange = async (e) => {
     const file = e.target.files[0];
@@ -29,7 +31,7 @@ function Register() {
     setDepartment("");
     setDesignation("");
     setImagePreview(null);
-    setPhoto("");
+    setPhoto(null)
   }
 
   const submitRegistration = async (e) => {
@@ -51,8 +53,9 @@ function Register() {
     try {
       await Axios.post('http://localhost:5000/api/insert', formData, {
         headers: { 'Content-Type': 'multipart/form-data' }
-      }).then(() => {
-        alert('registration successful');
+      }).then((response) => {
+        setShowAlert(true);
+        console.log('im here')
       }); 
     } catch (error) {
       console.error('an error');
@@ -77,6 +80,9 @@ function Register() {
                   onChange={(e) => {
                     setId(e.target.value);
                   }}
+                  pattern="[0-9]+"
+                  inputMode="numeric"
+                  title="Enter a Number"
                   required
                 />
               </div>
