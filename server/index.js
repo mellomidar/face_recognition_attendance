@@ -54,12 +54,11 @@ app.post("/api/insert",upload.single('photo'), (req, res) => {
       [id, name, dep, des, photo, registered_at, updated_at],
       (err, result) => {
         if(err) console.log(err); 
+        res.send(result);
     })
   } catch (error) {
-    
+    console.error(error)
   }
-
-  
 });
 
 
