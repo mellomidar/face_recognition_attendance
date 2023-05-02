@@ -11,23 +11,22 @@ function EmployeeInfo({ id }) {
   const [employee_name, setName] = useState("");
   const [department, setDepartment] = useState("");
   const [designation, setDesignation] = useState("");
-  const [prevPhoto, setPrevPhoto] = useState("")
+  const [prevPhoto, setPrevPhoto] = useState("");
   const [photo, setPhoto] = useState(null);
 
   const [imagePreview, setImagePreview] = useState(null);
 
   // Retrieving the chosen employee from table
   useEffect(() => {
-    Axios
-      .get(`http://localhost:5000/api/employee_info/${id}`)
+    Axios.get(`http://localhost:5000/api/employee_info/${id}`)
       .then((response) => {
         const employee = response.data[0];
         setRetrievedInfo(response);
-        setId(employee.employee_id)
-        setName(employee.name)
-        setDepartment(employee.department)
-        setDesignation(employee.designation)
-        setPrevPhoto(employee.image)
+        setId(employee.employee_id);
+        setName(employee.name);
+        setDepartment(employee.department);
+        setDesignation(employee.designation);
+        setPrevPhoto(employee.image);
       })
       .catch((error) => {
         console.error(error);
@@ -35,8 +34,8 @@ function EmployeeInfo({ id }) {
   }, [id]);
 
   const handleCancelClick = () => {
-    setDisabledInput(true)
-  }
+    setDisabledInput(true);
+  };
 
   // Handling photo upload change
   const handleImageChange = async (e) => {
@@ -58,8 +57,14 @@ function EmployeeInfo({ id }) {
 
   // handling the delete button event
   const handleDeleteClick = () => {
-
-  }
+    Axios.delete(`http://localhost:5000/api/delete_employee/${id}`)
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
 
   // Handling form submit
   const handleSubmit = async (e) => {
@@ -115,24 +120,24 @@ function EmployeeInfo({ id }) {
           </div>
         </div>
         <div className="edit-form-input">
-            <label htmlFor="profilePhoto">+ Upload</label>
-            <div className="preview-wrapper">
-              {imagePreview && (
-                <img className="preview" src={imagePreview} alt="Preview" />
-              )}
-            </div>
-            <input
-              id="profilePhoto"
-              name="profilePhoto"
-              type="file"
-              disabled={disabledInput}
-              className="file-picker"
-              onChange={(e) => {
-                setPhoto(e.target.files[0]);
-                handleImageChange(e);
-              }}  
-            />
+          <label htmlFor="profilePhoto">+ Upload</label>
+          <div className="preview-wrapper">
+            {imagePreview && (
+              <img className="preview" src={imagePreview} alt="Preview" />
+            )}
           </div>
+          <input
+            id="profilePhoto"
+            name="profilePhoto"
+            type="file"
+            disabled={disabledInput}
+            className="file-picker"
+            onChange={(e) => {
+              setPhoto(e.target.files[0]);
+              handleImageChange(e);
+            }}
+          />
+        </div>
       </form>
       <div className="edit-delete-btns">
         <button onClick={handleEditClick}>Edit</button>

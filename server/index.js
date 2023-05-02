@@ -120,15 +120,11 @@ app.get("/api/employee_list", (req, res) => {
   }
 });
 
+// Getting employee information on select
 app.get("/api/employee_info/:id", (req, res) => {
   try {
     db.query('SELECT * FROM employee WHERE employee_id = ?', [req.params.id], (err, result) => {
       if(err) throw err;
-      if(result.length === 0) {
-        return res.status(404).json({ message: 'User not found.' });
-      }
-      
-
       res.json(result);
     });
   } catch (error) {
@@ -136,6 +132,20 @@ app.get("/api/employee_info/:id", (req, res) => {
   }
 });
 
+// Deleting the selected employee
+app.delete("/api/delete_employee/:id", (req, res) => {
+  try {
+    db.query('DELETE FROM employee WHERE employee_id = ?', [req.params.id], (err, result) => {
+      if(err) throw err;
+      res.send(result);
+      console.log('deleted successfully');
+    })
+  } catch (error) {
+    res.status(500).send('Server error')
+  }
+})
+
+//generating csv file
 
 app.get("/api/csv_export", (req, res) => {
   const ws = fs.createWriteStream('./reports/report.csv')
@@ -152,10 +162,6 @@ app.get("/api/csv_export", (req, res) => {
   })
 })
 
-/*
-//generating csv file
-
-*/
 
 app.listen(5000, () => {
   console.log("listening to port 5000");
