@@ -151,7 +151,6 @@ function Register() {
           <button type="submit">Register</button>
         </form>
       </div>
-      <p>hello</p>
     </div>
   );
 }
