@@ -23,7 +23,7 @@ function DynamicTable({ data }) {
   }
 
   if(!data) {
-    return;
+    return <></>;
   } 
   
   else if(Object.keys(data[0]).length === 7){

@@ -56,9 +56,11 @@ function Register() {
     }).then(() => {
       setAlertText("Registration Successful");
       setShowAlert(true);
+      setTimeout(() => {setShowAlert(false)}, 2000);
     }).catch(() => {
       setAlertText("Registration Failed");
       setShowAlert(true);
+      setTimeout(() => {setShowAlert(false)}, 2000)
     })
   };
 

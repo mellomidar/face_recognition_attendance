@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import Axios from "axios";
 import "../App.css";
+import Alert from "./Alert";
 
 function EmployeeInfo({ id }) {
   const [retrievedInfo, setRetrievedInfo] = useState(null);
@@ -14,6 +15,9 @@ function EmployeeInfo({ id }) {
   const [prevPhoto, setPrevPhoto] = useState("");
   const [photo, setPhoto] = useState(null);
 
+  const [showAlert, setShowAlert] = useState(false);
+  const [alertText, setAlertText] = useState("");
+
   const [imagePreview, setImagePreview] = useState(null);
 
   // Retrieving the chosen employee from table
@@ -21,7 +25,7 @@ function EmployeeInfo({ id }) {
     Axios.get(`http://localhost:5000/api/employee_info/${id}`)
       .then((response) => {
         const employee = response.data[0];
-        setRetrievedInfo(response);
+        setRetrievedInfo(employee);
         setId(employee.employee_id);
         setName(employee.name);
         setDepartment(employee.department);
@@ -29,7 +33,7 @@ function EmployeeInfo({ id }) {
         setPrevPhoto(employee.image);
       })
       .catch((error) => {
-        console.error(error);
+        console.log(error);
       });
   }, [id]);
 
@@ -56,10 +60,13 @@ function EmployeeInfo({ id }) {
   };
 
   // handling the delete button event
-  const handleDeleteClick = () => {
+  const handleDeleteClick = (e) => {
+    e.preventDefault();
     Axios.delete(`http://localhost:5000/api/delete_employee/${id}`)
       .then((response) => {
         console.log(response);
+        setAlertText("Delete Successful");
+        setShowAlert(true);
       })
       .catch((error) => {
         console.error(error);
@@ -144,6 +151,7 @@ function EmployeeInfo({ id }) {
         <button onClick={handleCancelClick}>Cancel</button>
         <button onClick={handleDeleteClick}>Delete</button>
       </div>
+      {showAlert && (<Alert type="sucess" message={alertText}/>)}
     </div>
   );
 }
