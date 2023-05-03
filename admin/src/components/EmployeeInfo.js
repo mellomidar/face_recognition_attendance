@@ -3,9 +3,7 @@ import Axios from "axios";
 import "../App.css";
 import Alert from "./Alert";
 
-function EmployeeInfo({ id }) {
-  const [retrievedInfo, setRetrievedInfo] = useState(null);
-  const [queryType, setQueryType] = useState("");
+function EmployeeInfo({ id, onClose }) {
   const [disabledInput, setDisabledInput] = useState(true);
 
   const [employee_id, setId] = useState("");
@@ -25,7 +23,6 @@ function EmployeeInfo({ id }) {
     Axios.get(`http://localhost:5000/api/employee_info/${id}`)
       .then((response) => {
         const employee = response.data[0];
-        setRetrievedInfo(employee);
         setId(employee.employee_id);
         setName(employee.name);
         setDepartment(employee.department);
@@ -37,9 +34,14 @@ function EmployeeInfo({ id }) {
       });
   }, [id]);
 
-  const handleCancelClick = () => {
-    setDisabledInput(true);
-  };
+  const clearForm = () => {
+    setName("");
+    setId("");
+    setDepartment("");
+    setDesignation("")
+  }
+
+  
 
   // Handling photo upload change
   const handleImageChange = async (e) => {
@@ -53,20 +55,25 @@ function EmployeeInfo({ id }) {
     reader.readAsDataURL(file);
   };
 
-  // handling the edit button click event
-  const handleEditClick = () => {
-    setDisabledInput(false);
-    setQueryType("edit");
+  // handling CRUD operations events
+
+  const handleCancelClick = () => {
+    setDisabledInput(true);
+    onClose();
   };
 
-  // handling the delete button event
+  const handleEditClick = () => {
+    setDisabledInput(false);
+  };
+
   const handleDeleteClick = (e) => {
     e.preventDefault();
     Axios.delete(`http://localhost:5000/api/delete_employee/${id}`)
       .then((response) => {
-        console.log(response);
         setAlertText("Delete Successful");
         setShowAlert(true);
+        clearForm();
+        onClose();
       })
       .catch((error) => {
         console.error(error);

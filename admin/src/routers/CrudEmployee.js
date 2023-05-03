@@ -6,7 +6,7 @@ import DynamicTable from '../components/DynamicTable';
 function CrudEmployee () {
 
     const [data, setData] = useState(null);
-
+    
     useEffect(() => {
         Axios.get("http://localhost:5000/api/employee_list")
         .then((response) => {

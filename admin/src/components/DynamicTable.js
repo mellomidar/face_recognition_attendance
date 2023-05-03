@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import '../App.css';
 import EmployeeInfo from './EmployeeInfo';
 
@@ -8,6 +8,9 @@ function DynamicTable({ data }) {
   const [userInfoVisible, setUserInfoVisible] = useState(false);
   const [closeBtnVisible, setCloseBtnVisible] = useState('none');
 
+  const [crudVisible, setCrudVisible] = useState(false);
+
+
   const rowMouseOver = (event) => {
     setTargetId(event.target.parentNode.childNodes[1].textContent);
   }
@@ -15,11 +18,13 @@ function DynamicTable({ data }) {
   const handleRowClick = () => {
     setUserInfoVisible(true);
     setCloseBtnVisible('block');
+    setCrudVisible(true);
   }
 
   const handleCloseUserInfo = () => {
     setUserInfoVisible(false);
     setCloseBtnVisible('none');
+    setCrudVisible(false);
   }
 
   if(!data) {
@@ -58,10 +63,14 @@ function DynamicTable({ data }) {
 
         {/* Rendering User Info Page */}
         <div>
-          <button style={{display: closeBtnVisible}} className='user-info-btn' onClick={handleCloseUserInfo}>X</button>
-          {
-            userInfoVisible && <EmployeeInfo id={targetId}/>
-          }
+          {crudVisible && (
+            <>
+              <button style={{display: closeBtnVisible}} className='user-info-btn' onClick={handleCloseUserInfo}>X</button>
+              {
+                crudVisible && <EmployeeInfo id={targetId} onClose={handleCloseUserInfo}/>
+              }
+            </>
+          )}
         </div>
       </>
     );
