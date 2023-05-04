@@ -253,6 +253,10 @@ label[for="photo"]:active {
   justify-content: flex-start;
 }
 
+.report-subwindow * {
+  font-size: 1rem;
+}
+
 .record_table {
   background-color: white;
   font-size: 1.2rem;
@@ -304,16 +308,14 @@ label[for="photo"]:active {
   padding: .5rem;
 }
 
-.records-specs select, input {
-  cursor: pointer;
-  padding: .5rem;
-  height: 50px;
-  width: 150px;
-}
-
 .report-subwindow .records-specs * {
   border-radius: .5rem;
   border: none;
+  cursor: pointer;
+}
+
+.report-subwindow .records-specs select {
+  height: 40px;
 }
 
 /*Employee Table Design*/

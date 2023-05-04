@@ -68,11 +68,13 @@ app.get("/api/data", (req, res) => {
     db.query('SELECT * FROM attendance_record', (err, result) => {
       if(err) throw err;
       const data = result.map(row => {
+        const options = { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric'};
+        const date = row.attendance_date.toLocaleString('en-US', options)
         return {
           id: row.id,
           employee_id: row.employee_id,
           name: row.name,
-          date: row.attendance_date,
+          date: date,
           status: row.status,
           morning_in: row.morning_in,
           morning_out: row.morning_out,
@@ -154,9 +156,10 @@ app.get("/api/csv_export", (req, res) => {
 
   db.query("SELECT * FROM attendance_record", (error, data, fields) => {
     if (error) throw error;
-  
+    const options = { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric'};
+    const date = data[0].attendance_date.toLocaleString('en-US', options);
+    data[0].attendance_date = date;
     const jsonData = JSON.parse(JSON.stringify(data));
-    console.log("jsonData", jsonData);
   
     csv.write(jsonData,{ headers: true }).on("finish", () => {
       console.log("wrote csv successfully");

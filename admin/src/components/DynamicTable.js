@@ -81,21 +81,29 @@ function DynamicTable({ data }) {
     <table className='record_table'>
       <thead>
         <tr>
-          <th></th>
+          <th style={{width:'50px'}}></th>
           <th>Employee ID</th>
           <th>Employee Name</th>
           <th>Date</th>
-          <th>Time</th>
+          <th>Status</th>
+          <th>Morning In</th>
+          <th>Morning Out</th>
+          <th>Afternoon In</th>
+          <th>Afternoon Out</th>
         </tr>
       </thead>
       <tbody>
         {data.map((row) => (
           <tr key={row.id}>
-            <td>{row.id}</td>
+            <td style={{width: '50px'}}>{row.id}</td>
             <td>{row.employee_id}</td>
             <td>{row.name}</td>
             <td>{row.date}</td>
-            <td>{row.time}</td>
+            <td>{row.status}</td>
+            <td>{row.morning_in}</td>
+            <td>{row.morning_out}</td>
+            <td>{row.afternoon_in}</td>
+            <td>{row.afternoon_out}</td>
           </tr>
         ))}
       </tbody>
