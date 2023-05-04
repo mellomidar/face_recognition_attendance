@@ -251,6 +251,7 @@ label[for="photo"]:active {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+  overflow-y: scroll;
 }
 
 .report-subwindow * {
@@ -272,15 +273,22 @@ label[for="photo"]:active {
 }
 
 .report-subwindow button[type="submit"] {
-  width: 98%;
+  width: 49.5%;
   background-color: #daae36;
-  position: absolute;
-  bottom: 10px;
   border: none;
   padding: 1rem;
   border-radius: .5rem;
   cursor: pointer;
   font-size: 1.2rem;
+}
+
+.report-subwindow .buttons-container {
+  display: flex;
+  width: 100%;
+  height: 70px;
+  position: sticky;
+  bottom: 0;
+  justify-content: space-between;
 }
 
 .report-subwindow button[type="submit"]:hover {
@@ -457,13 +465,14 @@ label[for="photo"]:active {
   color: white;
   font-size: 1.2rem;
   border: none;
-  margin-top: 9rem;
   border-radius: .5rem;
+  width: 49.5%;
 }
 
 .print-btn:hover {
   background-color: white;
   color: black;
+  border: 1px solid #3074B4;
   cursor: pointer;
   transition: .3s;
 }

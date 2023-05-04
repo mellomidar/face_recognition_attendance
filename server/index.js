@@ -157,8 +157,11 @@ app.get("/api/csv_export", (req, res) => {
   db.query("SELECT * FROM attendance_record", (error, data, fields) => {
     if (error) throw error;
     const options = { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric'};
-    const date = data[0].attendance_date.toLocaleString('en-US', options);
-    data[0].attendance_date = date;
+    for(let i = 0; i < data.length; i++) {
+      const date = data[i].attendance_date.toLocaleString('en-US', options);
+      data[i].attendance_date = date;
+    }
+    
     const jsonData = JSON.parse(JSON.stringify(data));
   
     csv.write(jsonData,{ headers: true }).on("finish", () => {

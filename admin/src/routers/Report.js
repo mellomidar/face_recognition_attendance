@@ -93,8 +93,10 @@ function Report() {
         <button type="submit" onClick={fetchData}>
           View Data
         </button>
+        <button className="print-btn" onClick={exportReport}>
+          Print
+        </button>
       </div>
-      <button className="print-btn" onClick={exportReport}>Print</button>
     </div>
   );
 }
