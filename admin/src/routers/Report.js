@@ -3,7 +3,7 @@ import axios from "axios";
 import '../App.css'
 import DynamicTable from "../components/DynamicTable";
 
-function Register() {
+function Report() {
   // Define state variables to hold the data and the preview data
   const [data, setData] = useState(null);
   const [selectedSearch, setSelectedSearch] = useState("Month");
@@ -13,7 +13,7 @@ function Register() {
     axios
       .get("http://localhost:5000/api/data")
       .then((response) => {
-        setData(response)
+        setData(response.data)
       })
       .catch((error) => {
         console.log('error');
@@ -53,12 +53,15 @@ function Register() {
         <select name="selection" id="selection" value={selectedSearch} 
         onChange={handleSelectChange}>
           <option value="Month">Month</option>
-          <option value="Name">Name</option>
+          <option value="Department">Department</option>
           <option value="id">ID</option>
         </select>
-
+        <div>
+          <label for="date">Select a date:</label>
+          <input type="month" id="month" name="month"/>
+        </div>
       </div>
-
+      
       <div className="records-table-container">
         <DynamicTable data={data}></DynamicTable>
       </div>
@@ -73,4 +76,4 @@ function Register() {
   );
 }
 
-export default Register;
+export default Report;

@@ -10,7 +10,6 @@ function DynamicTable({ data }) {
 
   const [crudVisible, setCrudVisible] = useState(false);
 
-
   const rowMouseOver = (event) => {
     setTargetId(event.target.parentNode.childNodes[1].textContent);
   }
@@ -28,7 +27,7 @@ function DynamicTable({ data }) {
   }
 
   if(!data) {
-    return <></>;
+    return;
   } 
   
   else if(Object.keys(data[0]).length === 7){

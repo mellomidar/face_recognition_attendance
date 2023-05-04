@@ -294,6 +294,9 @@ label[for="photo"]:active {
 .report-subwindow .records-specs {
   height: 5 0px;
   margin-bottom: 1rem;
+  width: 50%;
+  display: flex;
+  align-items: center;
 }
 
 .records-specs * {
@@ -301,8 +304,16 @@ label[for="photo"]:active {
   padding: .5rem;
 }
 
-.report-subwindow .records-specs select {
+.records-specs select, input {
+  cursor: pointer;
+  padding: .5rem;
+  height: 50px;
+  width: 150px;
+}
+
+.report-subwindow .records-specs * {
   border-radius: .5rem;
+  border: none;
 }
 
 /*Employee Table Design*/
@@ -409,28 +420,33 @@ label[for="photo"]:active {
 }
 
 .edit-delete-btns {
-  height: 5%;
+  height: 10%;
+  width: 400px;
   margin-top: .5rem;
+  display: flex;
+  justify-content: space-between;
 }
 
 .edit-delete-btns button {
-  padding: .5rem 2rem;
+  padding: .1rem 2rem;
+  height: 80%;
   font-size: 1.2rem;
   cursor: pointer;
   border-radius: .5rem;
   border: none;
   transition: .2s;
+}
 
+.edit-delete-btns .submit-btn {
+  position: absolute;
+  height: 45px;
+  right: 50px;
 }
 
 .edit-delete-btns button:hover {
   background-color: #FFBB00;
   transform: scale(1.02);
   color: white;
-}
-
-.edit-delete-btns button:nth-child(2) {
-  margin: 0 1rem;
 }
 
 .print-btn {

@@ -12,6 +12,7 @@ function EmployeeInfo({ id, onClose }) {
   const [designation, setDesignation] = useState("");
   const [prevPhoto, setPrevPhoto] = useState("");
   const [photo, setPhoto] = useState(null);
+  const [showSubmit, setShowSubmit] = useState('none');
 
   const [showAlert, setShowAlert] = useState(false);
   const [alertText, setAlertText] = useState("");
@@ -41,8 +42,6 @@ function EmployeeInfo({ id, onClose }) {
     setDesignation("")
   }
 
-  
-
   // Handling photo upload change
   const handleImageChange = async (e) => {
     const file = e.target.files[0];
@@ -58,12 +57,14 @@ function EmployeeInfo({ id, onClose }) {
   // handling CRUD operations events
 
   const handleCancelClick = () => {
-    setDisabledInput(true);
+    setDisabledInput(!disabledInput);
     onClose();
   };
 
   const handleEditClick = () => {
+    clearForm();
     setDisabledInput(false);
+    setShowSubmit('inline-block');
   };
 
   const handleDeleteClick = (e) => {
@@ -96,8 +97,10 @@ function EmployeeInfo({ id, onClose }) {
               id="employeeName"
               name="employeeName"
               type="text"
+              readOnly={disabledInput}
               disabled={disabledInput}
               value={employee_name}
+              onChange={(e) => setName(e.target.value)}
             />
           </div>
           <div className="edit-form-input">
@@ -108,6 +111,7 @@ function EmployeeInfo({ id, onClose }) {
               type="text"
               disabled={disabledInput}
               value={employee_id}
+              onChange={(e) => setId(e.target.value)}
             />
           </div>
         </div>
@@ -120,6 +124,7 @@ function EmployeeInfo({ id, onClose }) {
               type="text"
               disabled={disabledInput}
               value={department}
+              onChange={(e) => setDepartment(e.target.value)}
             />
           </div>
           <div className="edit-form-input">
@@ -130,6 +135,7 @@ function EmployeeInfo({ id, onClose }) {
               type="text"
               disabled={disabledInput}
               value={designation}
+              onChange={(e) => setDesignation(e.target.value)}
             />
           </div>
         </div>
@@ -157,6 +163,7 @@ function EmployeeInfo({ id, onClose }) {
         <button onClick={handleEditClick}>Edit</button>
         <button onClick={handleCancelClick}>Cancel</button>
         <button onClick={handleDeleteClick}>Delete</button>
+        <button className="submit-btn" onClick={handleSubmit} style={{display: showSubmit}}>Submit</button>
       </div>
       {showAlert && (<Alert type="sucess" message={alertText}/>)}
     </div>
