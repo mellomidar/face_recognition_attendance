@@ -161,7 +161,6 @@ app.get("/api/csv_export", (req, res) => {
       const date = data[i].attendance_date.toLocaleString('en-US', options);
       data[i].attendance_date = date;
     }
-    
     const jsonData = JSON.parse(JSON.stringify(data));
   
     csv.write(jsonData,{ headers: true }).on("finish", () => {
