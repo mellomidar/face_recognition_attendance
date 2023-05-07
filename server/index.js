@@ -42,10 +42,9 @@ app.post("/api/insert", upload.single('photo'), (req, res) => {
   const photo = req.file.path;
   const registered_at = req.body.registered_at;
   const updated_at = req.body.updated_at;
-  const photo_blob = req.body.photo_blob;
 
   const checkEmployeeId = `SELECT COUNT(*) AS count FROM employee WHERE employee_id = ?`;
-  const insertEmployee = `INSERT INTO employee (employee_id, name, department, designation, image, registered_at, updated_at, photo_blob) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`;
+  const insertEmployee = `INSERT INTO employee (employee_id, name, department, designation, image, registered_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?)`;
   try {
     db.query(checkEmployeeId, [id], (err, result) => {
       if (err) {
@@ -59,7 +58,7 @@ app.post("/api/insert", upload.single('photo'), (req, res) => {
         return;
       }
   
-      db.query(insertEmployee, [id, name, dep, des, photo, registered_at, updated_at, Buffer.from(photo_blob, 'base64')], (err, result) => {
+      db.query(insertEmployee, [id, name, dep, des, photo, registered_at, updated_at], (err, result) => {
         if (err) {
           console.error(err);
           res.sendStatus(500);
