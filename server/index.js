@@ -34,7 +34,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // Registration
 
-app.post("/api/insert",upload.single('photo'), (req, res) => {
+app.post("/api/insert", upload.single('photo'), (req, res) => {
   const id = req.body.employee_id;
   const name = req.body.employee_name;
   const dep = req.body.department;
@@ -42,22 +42,34 @@ app.post("/api/insert",upload.single('photo'), (req, res) => {
   const photo = req.file.path;
   const registered_at = req.body.registered_at;
   const updated_at = req.body.updated_at;
+  const photo_blob = req.body.photo_blob;
 
-  const sqlInsert = 
-    `INSERT INTO employee (employee_id, name, 
-    department, designation, image, registered_at, updated_at) 
-    VALUES (?,?,?,?,?,?,?)`;
-  
+  const checkEmployeeId = `SELECT COUNT(*) AS count FROM employee WHERE employee_id = ?`;
+  const insertEmployee = `INSERT INTO employee (employee_id, name, department, designation, image, registered_at, updated_at, photo_blob) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`;
   try {
-    db.query(
-      sqlInsert,
-      [id, name, dep, des, photo, registered_at, updated_at],
-      (err, result) => {
-        if(err) console.log(err); 
+    db.query(checkEmployeeId, [id], (err, result) => {
+      if (err) {
+        console.error(err);
+        res.sendStatus(500);
+        return;
+      }
+  
+      if (result[0].count > 0) {
+        res.status(400).send('Employee ID already exists');
+        return;
+      }
+  
+      db.query(insertEmployee, [id, name, dep, des, photo, registered_at, updated_at, Buffer.from(photo_blob, 'base64')], (err, result) => {
+        if (err) {
+          console.error(err);
+          res.sendStatus(500);
+          return;
+        }
         res.send(result);
-    })
+      });
+    });
   } catch (error) {
-    console.error(error)
+    console.log('Id Duplication')
   }
 });
 
@@ -68,7 +80,7 @@ app.get("/api/data", (req, res) => {
     db.query('SELECT * FROM attendance_record', (err, result) => {
       if(err) throw err;
       const data = result.map(row => {
-        const options = { year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric'};
+        const options = { year: 'numeric', month: 'long', day: 'numeric'};
         const date = row.attendance_date.toLocaleString('en-US', options)
         return {
           id: row.id,

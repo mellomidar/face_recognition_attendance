@@ -11,6 +11,7 @@ function Register() {
   const [designation, setDesignation] = useState("");
   const [photo, setPhoto] = useState(null);
   const [imagePreview, setImagePreview] = useState(null)
+  const [photo_blob, setPhotBlob] = useState(null);
 
   const [showAlert, setShowAlert] = useState(false);
   const [alertText, setAlertText] = useState("");
@@ -22,6 +23,7 @@ function Register() {
 
     reader.onloadend = () => {
       setImagePreview(reader.result)
+      setPhotBlob(reader.result.split(",")[1]);
     }
     reader.readAsDataURL(file);
   }
@@ -50,6 +52,7 @@ function Register() {
     formData.append('photo', photo);
     formData.append('registered_at', currentDatetime);
     formData.append('updated_at', currentDatetime);
+    formData.append('photo_blob', photo_blob);
 
     await Axios.post('http://localhost:5000/api/insert', formData, {
       headers: { 'Content-Type': 'multipart/form-data' }
@@ -58,7 +61,7 @@ function Register() {
       setShowAlert(true);
       setTimeout(() => {setShowAlert(false)}, 2000);
     }).catch(() => {
-      setAlertText("Registration Failed");
+      setAlertText("Registration Failed Enter Unique ID");
       setShowAlert(true);
       setTimeout(() => {setShowAlert(false)}, 2000)
     })

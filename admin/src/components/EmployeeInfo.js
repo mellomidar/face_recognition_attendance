@@ -24,11 +24,15 @@ function EmployeeInfo({ id, onClose }) {
     Axios.get(`http://localhost:5000/api/employee_info/${id}`)
       .then((response) => {
         const employee = response.data[0];
+        console.log(employee)
         setId(employee.employee_id);
         setName(employee.name);
         setDepartment(employee.department);
         setDesignation(employee.designation);
-        setPrevPhoto(employee.image);
+        
+        const photoBlob = new Blob([employee.photo_blob], {type: "image/png"});
+        const photoUrl = URL.createObjectURL(photoBlob);
+        setPrevPhoto(photoUrl);
       })
       .catch((error) => {
         console.log(error);
@@ -146,6 +150,8 @@ function EmployeeInfo({ id, onClose }) {
               <img className="preview" src={imagePreview} alt="Preview" />
             )}
           </div>
+          {console.log(prevPhoto)}
+          <img src={prevPhoto} alt="employee"/>
           <input
             id="profilePhoto"
             name="profilePhoto"
