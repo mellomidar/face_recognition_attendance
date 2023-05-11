@@ -150,8 +150,6 @@ function EmployeeInfo({ id, onClose }) {
               <img className="preview" src={imagePreview} alt="Preview" />
             )}
           </div>
-          {console.log(prevPhoto)}
-          <img src={prevPhoto} alt="employee"/>
           <input
             id="profilePhoto"
             name="profilePhoto"
