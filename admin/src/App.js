@@ -8,11 +8,12 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Layout from './routers/Layout';
 import Home from './routers/Home';
 import CrudEmployee from './routers/CrudEmployee';
+import Authentication from './routers/Authentication';
 
 function App() {
-
   return (
     <div className="App">
+      <Authentication/>
       <div className="top-container">
         <div className="top-left">
           <img className="bisu-logo" src={logo} alt='bisu logo'></img>

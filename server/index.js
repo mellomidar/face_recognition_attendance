@@ -12,7 +12,7 @@ const app = express();
 const db = mysql.createPool({
   host: "localhost",
   user: "root",
-  password: "lehcorsql110120",
+  password: "facerec_database01",
   database: "facerecattendance",
   connectionLimit: 20,
 });
