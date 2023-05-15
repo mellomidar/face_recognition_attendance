@@ -1,5 +1,5 @@
 import './App.css';
-import React from 'react';
+import React, { useEffect } from 'react';
 import logo from './assets/bisu-logo.png'
 import DateTime from './components/DateTime';
 import Register from './routers/Register';

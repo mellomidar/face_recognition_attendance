@@ -485,12 +485,13 @@ label[for="photo"]:active {
   background-color: green;
   border: none;
   position: absolute;
-  left: 400px;
+  left: 500px;
   top: 200px;
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
+  z-index: 100;
 }
 
 .alert p {
@@ -520,8 +521,13 @@ label[for="photo"]:active {
   background-color: #2D5078;
   border-radius: 1rem;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: space-around;
+  padding: 2rem 0;
+}
+
+.auth-form-container * {
   font-family: Arial, Helvetica, sans-serif;
 }
 
@@ -531,7 +537,7 @@ label[for="photo"]:active {
   flex-direction: column;
   justify-content: space-between;
   width: 100%;
-  height: 100px;
+  height: 25%;
   color: #FFBB00;
 }
 
@@ -546,4 +552,57 @@ label[for="photo"]:active {
 .auth-form-container .login_top hr {
   border: 0.5px solid #688393;
   width: 80%;
+}
+
+.auth-form {
+  height: 60%;
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.input-group {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.auth-form input, button {
+  width: 80%;
+  font-size: 1.2rem;  
+  padding: .8rem;
+  border-radius: .5rem;
+  border: none;
+  background-color: #D9D9D9;
+}
+
+.auth-form label {
+  color: #FFBB00;
+  align-self: flex-start;
+  margin-left:36px;
+  margin-bottom: 5px;
+}
+
+.auth-form button[type='submit'] {
+  background-color: #3780C3;
+  cursor: pointer;
+  color: white;
+}
+
+.auth-form button[type='submit']:hover {
+  background-color: #041e3d;
+  transition: .2s;
+}
+
+.auth-form button[type='submit']:active {
+  transform: scale(0.97);
+  transition: 0.1s;
+}
+
+.auth-form p {
+  margin-left: 150px;
+  color: #6087B4;
 }

@@ -72,6 +72,19 @@ app.post("/api/insert", upload.single('photo'), (req, res) => {
   }
 });
 
+app.get("/api/authenticate", (req, res) => {
+  const {username, password} = req.query;
+  const sql = `SELECT * FROM admin WHERE username = '${username}' AND pass = '${password}'`;
+
+  db.query(sql, (err, result) => {
+    if (err) throw err;
+    if(result.length > 0) {
+      res.send('Login Successful');
+    } else {
+      res.send('Login Failed')
+    }
+  })
+})
 
 // Route to retrieve attendance data from MySQL and send it to frontend
 app.get("/api/data", (req, res) => {
