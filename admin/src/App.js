@@ -1,6 +1,7 @@
 import './App.css';
 import React, { useEffect, useState } from 'react';
 import logo from './assets/bisu-logo.png'
+import logoutBtn from './assets/logout-btn.png'
 import DateTime from './components/DateTime';
 import Register from './routers/Register';
 import Report from './routers/Report';
@@ -17,7 +18,6 @@ function App() {
   useEffect(() => {
     const token = localStorage.getItem('jwt');
     if(token) {
-      console.log(token)
       document.getElementById('auth').style.display = 'none';
     }
   }, [hasToken])
@@ -25,11 +25,13 @@ function App() {
   const handleLogout = () => {
     localStorage.removeItem('jwt');
     setHasToken(!hasToken);
+    document.getElementById('home-link').click();
   }
   return (
     <div className="App">
       <Authentication/>
-      <button onClick={handleLogout}>Logout</button>
+      <a href='http://localhost:3000/' id='home-link'>link</a>
+      <button onClick={handleLogout} id='logout-btn'><img src={logoutBtn} alt='logout'/></button>
       <div className="top-container">
         <div className="top-left">
           <img className="bisu-logo" src={logo} alt='bisu logo'></img>

@@ -606,3 +606,50 @@ label[for="photo"]:active {
   margin-left: 150px;
   color: #6087B4;
 }
+
+#logout-btn {
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: none;
+  background-color:#FFBB00;
+  z-index: 99;
+}
+
+#logout-btn::before {
+  content: 'Logout';
+  visibility: hidden;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+#logout-btn img {
+  width: 50%;
+}
+
+#logout-btn:hover {
+  cursor: pointer;
+  background-color: #c4a654;
+  transform: scale(.97);
+}
+
+#logout-btn:hover::before {
+  visibility: visible;
+  opacity: 1;
+}
+
+#home-link {
+  display: none;
+}

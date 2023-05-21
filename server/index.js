@@ -80,7 +80,6 @@ app.get("/api/authenticate", (req, res) => {
   db.query(sql, (err, result) => {
     if (err) throw err;
     if(result.length > 0) {
-      console.log(result);
       const payload = {userId: result[0].userId, username: result[0].username};
       const secretKey = "Hello World";
       const token = jwt.sign(payload, secretKey);

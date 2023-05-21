@@ -5,7 +5,7 @@ const Home = () => {
       <h1 className='system-title'>
         <span>FACE RECOGNITION</span>
         <span>ATTENDANCE SYSTEM</span>
-      </h1>;
+      </h1>
     </div>
   };
   

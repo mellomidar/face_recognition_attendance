@@ -20,9 +20,7 @@ const Authentication = () => {
                     password: password
                 }
             });
-            console.log(response)
             if(response.data.token) {
-                console.log(response.data.token)
                 Cookies.set('jwt', response.data.token, {expires: 7});
                 localStorage.setItem('jwt', response.data.token)
                 document.getElementById('auth').style.display = 'none';
