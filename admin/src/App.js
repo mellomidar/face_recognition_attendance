@@ -11,6 +11,14 @@ import CrudEmployee from './routers/CrudEmployee';
 import Authentication from './routers/Authentication';
 
 function App() {
+
+  useEffect(() => {
+    const token = localStorage.getItem('jwt');
+    if(token) {
+      console.log(token)
+      document.getElementById('auth').style.display = 'none';
+    }
+  }, [])
   return (
     <div className="App">
       <Authentication/>

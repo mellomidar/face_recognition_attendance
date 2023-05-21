@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import bisu_logo from '../assets/bisu-logo.png';
 import Axios from 'axios';
 import Alert from '../components/Alert';
+import Cookies from 'js-cookie';
 
 const Authentication = () => {
 
@@ -19,12 +20,14 @@ const Authentication = () => {
                     password: password
                 }
             });
-            setAlertText(response.data)
-            console.log(response.data)
-            if(response.data === "Login Successful") {
-                setShowAlert(!showAlert);
+            console.log(response)
+            if(response.data.token) {
+                console.log(response.data.token)
+                Cookies.set('jwt', response.data.token, {expires: 7});
+                localStorage.setItem('jwt', response.data.token)
                 document.getElementById('auth').style.display = 'none';
-            } else if (response.data === "Login Failed") {
+            } else {
+                setAlertText("Login Failed");
                 setShowAlert(!showAlert);
             }
             clearForm();
