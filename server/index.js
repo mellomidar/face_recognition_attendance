@@ -6,6 +6,7 @@ const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
 const csv = require('fast-csv');
+const jwt = require('jsonwebtoken');
 
 const app = express();
 
@@ -79,9 +80,13 @@ app.get("/api/authenticate", (req, res) => {
   db.query(sql, (err, result) => {
     if (err) throw err;
     if(result.length > 0) {
-      res.send('Login Successful');
+      console.log(result);
+      const payload = {userId: result[0].userId, username: result[0].username};
+      const secretKey = "Hello World";
+      const token = jwt.sign(payload, secretKey);
+      return res.json({ token });
     } else {
-      res.send('Login Failed')
+      res.send()
     }
   })
 })
